@@ -10,7 +10,15 @@ from concurrent.futures import ThreadPoolExecutor as Pool
 
 conf_path = None
 
-for loc in Path('/etc/em/em.conf'), Path('~/.config/em/em.conf'):
+conf_paths = [
+    Path('/usr/local/share/em/em.conf'),
+    Path('/usr/share/em/em.conf'),
+    Path('/etc/em/em.conf'),
+    Path('~/.local/share/em/em.conf'),
+    Path('~/.config/em/em.conf')
+]
+
+for loc in conf_paths:
     if loc.expanduser().exists():
         conf_path = loc.expanduser()
 
