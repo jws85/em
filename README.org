@@ -1,0 +1,21 @@
+* ecli
+
+  ~ecli~ is a small Python Qt script that launches an Emacs client
+  frame using an existing Emacs server instance; or alternatively
+  launches a new Emacs server if one does not already exist.
+
+  Since *some of us* have really unoptimized, bloated Emacs installs,
+  this is a fun bit of desktop whimsy while waiting for the server to
+  start up :P
+
+* Dependencies
+
+  - Python 3
+  - ~python3-qtpy~
+  - ~python-pil~
+
+* Credits
+
+  The loading icon comes from [[https://www.reddit.com/r/loadingicon/comments/6hy8cd/when_loading_takes_forever_oc/][this Reddit thread]], which seems to
+  be the original source as far as I can tell?  So, the creator
+  appears to be [[https://www.reddit.com/user/PortablePawnShop][/u/PortablePawnShop]].
