@@ -1,8 +1,8 @@
-* ecli
+* em
 
-  ~ecli~ is a small Python Qt script that launches an Emacs client
-  frame using an existing Emacs server instance; or alternatively
-  launches a new Emacs server if one does not already exist.
+  ~em~ is a small Python Qt script that launches an Emacs client frame
+  using an existing Emacs server instance; or alternatively launches a
+  new Emacs server if one does not already exist.
 
   Since *some of us* have really unoptimized, bloated Emacs installs,
   this is a fun bit of desktop whimsy while waiting for the server to
