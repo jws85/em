@@ -2,6 +2,7 @@
 # sudo apt install python3-qtpy python-pil
 
 import sys, io, subprocess
+from argparse import ArgumentParser
 from configparser import ConfigParser
 from pathlib import Path
 from qtpy import QtCore, QtGui, QtWidgets
@@ -37,6 +38,13 @@ if not gif.exists():
     print('No loading GIF at %s' % gif)
     sys.exit(102)
 
+parser = ArgumentParser(description='emacsclient wrapper')
+parser.add_argument('-f', '--fullsize', action='store_true', help='Maximize window')
+parser.add_argument('-l', '--lisp', action='store',
+                    help='Execute Emacs Lisp s-expressions')
+parser.add_argument('files', nargs='*', action='append')
+args = parser.parse_args()
+
 app = QtWidgets.QApplication(sys.argv)
 
 data = open(gif, 'rb').read()
@@ -67,8 +75,20 @@ w.show()
 def cb(future):
     w.close()
 
+cmd = ['emacsclient', '-c', '-n', '--alternate-editor=']
+if args.fullsize:
+    cmd.append('-F')
+    cmd.append('(list (fullscreen . maximized))')
+
+if args.lisp is not None:
+    cmd.append('-e')
+    cmd.append(args.lisp)
+elif len(args.files[0]) > 0:
+    for f in args.files[0]:
+        cmd.append(f)
+
 pool = Pool(max_workers=1)
-proc = pool.submit(subprocess.call, ['emacsclient', '-c', '-n', '--alternate-editor='])
+proc = pool.submit(subprocess.call, cmd)
 proc.add_done_callback(cb)
 
 app.exec_()
