@@ -23,7 +23,11 @@ class Config:
             self._conf.read(self._conf_path)
 
     def gifPath(self):
-        gif = Path(self._conf['DEFAULT']['LoadingGif']).expanduser()
+        gif_path = self._conf['DEFAULT']['LoadingGif']
+        if gif_path is None:
+            return None
+
+        gif = Path(gif_path).expanduser()
 
         if not gif.is_absolute():
             gif = self._conf_path.parent / gif
