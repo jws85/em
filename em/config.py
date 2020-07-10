@@ -5,8 +5,6 @@ class Config:
     _conf_paths = [
         Path('/usr/local/share/em/em.conf'),
         Path('/usr/share/em/em.conf'),
-        Path('/etc/em/em.conf'),
-        Path('~/.local/share/em/em.conf'),
         Path('~/.config/em/em.conf')
     ]
 
@@ -17,11 +15,12 @@ class Config:
             if loc.expanduser().exists():
                 self._conf_path = loc.expanduser()
 
-        if self._conf_path is None:
-            raise FileNotFoundError('No em config file found!')
+        self._conf = ConfigParser(defaults={
+            'LoadingGif': None
+        })
 
-        self._conf = ConfigParser()
-        self._conf.read(self._conf_path)
+        if self._conf_path is not None:
+            self._conf.read(self._conf_path)
 
     def gifPath(self):
         gif = Path(self._conf['DEFAULT']['LoadingGif']).expanduser()
