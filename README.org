@@ -1,21 +1,48 @@
 * em
 
-  ~em~ is a small Python Qt script that launches an Emacs client frame
-  using an existing Emacs server instance; or alternatively launches a
-  new Emacs server if one does not already exist.
+~em~ is a small Python Qt script that launches an Emacs client frame
+using an existing Emacs server instance; or alternatively launches a
+new Emacs server if one does not already exist.
 
-  Since *some of us* have really unoptimized, bloated Emacs installs,
-  this is a fun bit of desktop whimsy while waiting for the server to
-  start up :P
+Since *some of us* have really unoptimized, bloated Emacs installs,
+this is a fun bit of desktop whimsy while waiting for the server to
+start up :P
 
 * Dependencies
 
-  - Python 3
-  - ~python3-qtpy~
-  - ~python-pil~
+ - Python 3.6-3.8 (...limitations of PySide2)
+ - Qt 5 libraries (but PySide2/PyQt do NOT need to be installed)
+ - [[https://github.com/pipxproject/pipx][pipx]]
+
+Once you have pipx installed, installing this script should just be a
+simple matter of
+
+#+begin_src shell
+  pipx install 'git+https://github.com/jws85/em.git'
+#+end_src
+
+which should pull in ~em~ and all its dependencies (including PySide2)
+into its own virtualenv but still leave it accessible from the command
+line.  Removing ~em~ is just as easy:
+
+#+begin_src shell
+  pipx uninstall em
+#+end_src
+
+* Customization
+
+Have your own loading gif?  Create the file ~$HOME/.config/em/em.conf~
+and put something like:
+
+#+begin_src conf
+  [DEFAULT]
+  LoadingGif = ~/Pictures/my-kewl-loading.gif
+#+end_src
+
+and it'll load your gif rather than the one I've included.
 
 * Credits
 
-  The loading icon comes from [[https://www.reddit.com/r/loadingicon/comments/6hy8cd/when_loading_takes_forever_oc/][this Reddit thread]], which seems to
-  be the original source as far as I can tell?  So, the creator
-  appears to be [[https://www.reddit.com/user/PortablePawnShop][/u/PortablePawnShop]].
+The loading icon comes from [[https://www.reddit.com/r/loadingicon/comments/6hy8cd/when_loading_takes_forever_oc/][this Reddit thread]], which seems to be the
+original source as far as I can tell?  So, the creator appears to be
+[[https://www.reddit.com/user/PortablePawnShop][/u/PortablePawnShop]].
