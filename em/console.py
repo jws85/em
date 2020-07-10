@@ -2,10 +2,16 @@ import sys
 from argparse import ArgumentParser
 from PySide2 import QtWidgets, QtCore, QtGui
 
+try:
+    import importlib.resources as pkg_resources
+except ImportError:
+    import importlib_resources as pkg_resources
+
 from em.config import Config
 from em.emacs import run_emacsclient
 from em.gif import GIF
 from em.window import Window
+from . import resources
 
 def run():
     try:
@@ -13,6 +19,11 @@ def run():
     except FileNotFoundError as err:
         print('File not found: ' + str(err))
         sys.exit(1)
+
+    if config.gifPath() is not None:
+        gif = GIF(path=config.gifPath())
+    else:
+        gif = GIF(data=pkg_resources.read_binary(resources, 'loading.gif'))
 
     parser = ArgumentParser(description='emacsclient wrapper')
     parser.add_argument('-f', '--fullsize', action='store_true', help='Maximize window')
@@ -24,7 +35,6 @@ def run():
     app = QtWidgets.QApplication([])
     app.setApplicationName('em')
 
-    gif = GIF(config.gifPath())
     window = Window(gif, app.primaryScreen().availableGeometry())
 
     bytearr = QtCore.QByteArray(gif.data())
