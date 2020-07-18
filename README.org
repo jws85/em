@@ -1,6 +1,6 @@
 * em
 
-~em~ is a small Python Qt script that launches an Emacs client frame
+~em~ is a small Python Tk script that launches an Emacs client frame
 using an existing Emacs server instance; or alternatively launches a
 new Emacs server if one does not already exist.
 
@@ -10,8 +10,8 @@ start up :P
 
 * Dependencies
 
- - Python 3.6-3.8 (...limitations of PySide2)
- - Qt 5 libraries (but PySide2/PyQt do NOT need to be installed)
+ - Python 3.6+
+ - Tkinter (may need to install from distro repos)
  - [[https://github.com/pipxproject/pipx][pipx]]
 
 Once you have pipx installed, installing this script should just be a
@@ -21,9 +21,8 @@ simple matter of
   pipx install 'git+https://github.com/jws85/em.git'
 #+end_src
 
-which should pull in ~em~ and all its dependencies (including PySide2)
-into its own virtualenv but still leave it accessible from the command
-line.  Removing ~em~ is just as easy:
+which should pull in ~em~ into its own virtualenv but still leave it
+accessible from the command line.  Removing ~em~ is just as easy:
 
 #+begin_src shell
   pipx uninstall em
