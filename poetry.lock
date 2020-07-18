@@ -37,8 +37,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "502744515f85493f5b462d8bd158b28c89fe131d68ab62f01cd6998fe79acd61"
-python-versions = ">=3.6,<3.9"
+content-hash = "4513854ee90baf5037e50c60c330e220cff17f70d6595d259d63afd047d8cdcb"
+python-versions = ">=3.6"
 
 [metadata.files]
 importlib-resources = [
