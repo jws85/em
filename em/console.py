@@ -1,6 +1,5 @@
 import sys
 from argparse import ArgumentParser
-from PySide2 import QtWidgets, QtCore, QtGui
 
 try:
     import importlib.resources as pkg_resources
@@ -32,20 +31,9 @@ def run():
     parser.add_argument('files', nargs='*', action='append')
     args = parser.parse_args()
 
-    app = QtWidgets.QApplication([])
-    app.setApplicationName('em')
-
-    window = Window(gif, app.primaryScreen().availableGeometry())
-
-    bytearr = QtCore.QByteArray(gif.data())
-    gif_buffer = QtCore.QBuffer(bytearr)
-    movie = QtGui.QMovie()
-    movie.setDevice(gif_buffer)
-
-    window.setMovie(movie)
-    movie.start()
+    window = Window(gif.pil())
 
     proc = run_emacsclient(args.files, args.fullsize, args.lisp)
-    proc.add_done_callback(lambda future: window.close())
+    proc.add_done_callback(lambda future: window.quit())
 
-    sys.exit(app.exec_())
+    window.mainloop()

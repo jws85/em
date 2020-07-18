@@ -10,8 +10,11 @@ class GIF:
         else:
             raise ValueError('Must supply either `path` or `data`')
 
+    def pil(self):
+        return Image.open(io.BytesIO(self._data))
+
     def dimensions(self):
-        pil = Image.open(io.BytesIO(self._data))
+        pil = self.pil()
         return [pil.size[0], pil.size[1]]
 
     def data(self):
