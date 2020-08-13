@@ -16,8 +16,8 @@ class Config:
                 self._conf_path = loc.expanduser()
 
         self._conf = ConfigParser(defaults={
-            'LoadingGif': None
-        })
+            'LoadingGif': 'None'
+        }, allow_no_value=True)
 
         if self._conf_path is not None:
             self._conf.read(self._conf_path)
