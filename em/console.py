@@ -8,7 +8,7 @@ except ImportError:
 
 from em.config import Config
 from em.emacs import run_emacsclient
-from em.gif import GIF
+from em.image import Image
 from em.window import Window
 from . import resources
 
@@ -20,9 +20,9 @@ def run():
         sys.exit(1)
 
     if config.gifPath() is not None:
-        gif = GIF(path=config.gifPath())
+        gif = Image(path=config.gifPath())
     else:
-        gif = GIF(data=pkg_resources.read_binary(resources, 'loading.gif'))
+        gif = Image(data=pkg_resources.read_binary(resources, 'loading.gif'))
 
     parser = ArgumentParser(description='emacsclient wrapper')
     parser.add_argument('-f', '--fullsize', action='store_true', help='Maximize window')

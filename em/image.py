@@ -1,7 +1,7 @@
 import io
-from PIL import Image
+import PIL
 
-class GIF:
+class Image:
     def __init__(self, **kwargs):
         if 'path' in kwargs:
             self._data = open(kwargs['path'], 'rb').read()
@@ -11,7 +11,7 @@ class GIF:
             raise ValueError('Must supply either `path` or `data`')
 
     def pil(self):
-        return Image.open(io.BytesIO(self._data))
+        return PIL.Image.open(io.BytesIO(self._data))
 
     def dimensions(self):
         pil = self.pil()
