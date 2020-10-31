@@ -7,7 +7,7 @@ except ImportError:
     import importlib_resources as pkg_resources
 
 from em.config import Config
-from em.emacs import run_emacsclient
+from em.emacs import EmacsClient
 from em.image import Image
 from em.window import Window
 from . import resources
@@ -33,7 +33,17 @@ def run():
 
     window = Window(gif.pil())
 
-    proc = run_emacsclient(args.files, args.fullsize, args.lisp)
+    emacs = EmacsClient()
+    if args.fullsize:
+        emacs.fullscreen()
+
+    if args.lisp is not None:
+        emacs.lisp_code(args.lisp)
+
+    if args.files is not None:
+        emacs.add_files(args.files[0])
+
+    proc = emacs.run_gui()
     proc.add_done_callback(lambda future: window.quit())
 
     window.mainloop()
