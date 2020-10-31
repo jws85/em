@@ -16,7 +16,7 @@ class Config:
                 self._conf_path = loc.expanduser()
 
         self._conf = ConfigParser(defaults={
-            'LoadingGif': 'None'
+            'LoadingGif': ''
         }, allow_no_value=True)
 
         if self._conf_path is not None:
@@ -24,7 +24,7 @@ class Config:
 
     def gifPath(self):
         gif_path = self._conf['DEFAULT']['LoadingGif']
-        if gif_path is None:
+        if gif_path == '':
             return None
 
         gif = Path(gif_path).expanduser()
