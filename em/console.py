@@ -26,12 +26,15 @@ def run():
 
     parser = ArgumentParser(description='emacsclient wrapper')
     parser.add_argument('-f', '--fullsize', action='store_true', help='Maximize window')
+    parser.add_argument('-t', '--terminal', action='store_true', help='Run in terminal')
     parser.add_argument('-l', '--lisp', action='store',
                         help='Execute Emacs Lisp s-expressions')
     parser.add_argument('files', nargs='*', action='append')
     args = parser.parse_args()
 
-    window = Window(gif.pil())
+    window = None
+    if not args.terminal:
+        window = Window(gif.pil())
 
     emacs = EmacsClient()
     if args.fullsize:
@@ -43,7 +46,9 @@ def run():
     if args.files is not None:
         emacs.add_files(args.files[0])
 
-    proc = emacs.run_gui()
-    proc.add_done_callback(lambda future: window.quit())
-
-    window.mainloop()
+    if window is None:
+        proc = emacs.run_terminal()
+    else:
+        proc = emacs.run_gui()
+        proc.add_done_callback(lambda future: window.quit())
+        window.mainloop()
