@@ -1,12 +1,12 @@
 * em
 
-~em~ is a small Python Tk script that launches an Emacs client frame
-using an existing Emacs server instance; or alternatively launches a
-new Emacs server if one does not already exist.
+~em~ is a small Python wrapper script for =emacsclient=, serving
+the following needs:
 
-Since *some of us* have really unoptimized, bloated Emacs installs,
-this is a fun bit of desktop whimsy while waiting for the server to
-start up :P
+ - =emacsclient='s arguments are kinda wacky, at least to me
+ - Takes care of launching a server if one doesn't exist
+ - If you have a bloated =.emacs.d= like I do, show an animated
+   GIF while you wait for Emacs to start
 
 * Dependencies
 
@@ -28,9 +28,21 @@ accessible from the command line.  Removing ~em~ is just as easy:
   pipx uninstall em
 #+end_src
 
+* Usage
+
+=em= fires up a new Emacs GUI frame.
+
+=em file.txt= does the same, but viewing =file.txt=.
+
+=em -t= loads a new Emacs terminal frame, etc.
+
+=em -l '(some-lisp-here)'= runs arbitrary elisp.
+
+=em -h= prints help.
+
 * Customization
 
-Have your own loading gif?  Create the file ~$HOME/.config/em/em.conf~
+Have your own loading gif?  Create the file =$HOME/.config/em/em.conf=
 and put something like:
 
 #+begin_src conf
