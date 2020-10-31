@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "em"
-version = "0.2.0"
+version = "0.4.1"
 description = "Startup script for emacsclient"
 authors = ["J. W. Smith <jwsmith2spam at gmail dot com>"]
 
